@@ -1,0 +1,31 @@
+name: Flutter CI
+
+on:
+  push:
+    branches: [ master, release/* ]
+  pull_request:
+    branches: [ master, release/* ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+
+      - name: Pub Get Packages
+        run: flutter pub get
+        
+      - name: build appbundle
+        run: flutter build appbundle
+        
+      - name: Upload appbundle
+        uses: actions/upload-artifact@v2
+        with:
+          name: appbundle
+          path: build/app/outputs/bundle/release
+
+      - name: build iOS
+        run: flutter build ios
