@@ -27,5 +27,3 @@ jobs:
           name: appbundle
           path: build/app/outputs/bundle/release
 
-      - name: build iOS
-        run: flutter build ios
